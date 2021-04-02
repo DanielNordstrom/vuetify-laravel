@@ -8,40 +8,52 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@store'
+import api from '@services/api'
+
+import vuetify from "@plugins/vuetify.js";
 
 Vue.use(VueRouter)
 
-import App          from './components/App'
-import Dashboard    from './components/Dashboard'
-import Login        from './components/Login'
-import Register     from './components/Register'
-import Home         from './components/Welcome'
+import App              from '@components/App'
+import DashboardPage    from '@pages/DashboardPage'
+import LoginPage        from '@pages/LoginPage'
+import RegisterPage     from '@pages/RegisterPage'
+import TestPage         from '@pages/TestPage'
+import BlogPage         from '@pages/BlogPage'
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home,
+            name: 'board',
+            component: DashboardPage,
         },
         {
             path: '/login',
             name: 'login',
-            component: Login,
+            component: LoginPage,
         },
         {
             path: '/register',
             name: 'register',
-            component: Register,
+            component: RegisterPage,
         },
         {
-            path: '/board',
-            name: 'board',
-            component: Dashboard,
+            path: '/test',
+            name: 'test',
+            component: TestPage,
+        },
+        {
+            path: '/blog',
+            name: 'blog',
+            component: BlogPage,
         },
     ],
 })
+
+Vue.prototype.$http = api;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -52,5 +64,7 @@ const router = new VueRouter({
 const app = new Vue({
     el: '#app',
     components: { App },
+    vuetify,
+    store,
     router
 });

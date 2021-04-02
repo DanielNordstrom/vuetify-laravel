@@ -1,5 +1,8 @@
 {
+    "typeAcquisition": {
+        "exclude": [ "dotenv", "source-map" ]
+    },
     "include": [
-        "./src/**/*"
+        "./resources/js/**/*"
     ]
 }

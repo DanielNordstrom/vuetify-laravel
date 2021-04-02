@@ -1,43 +1,33 @@
 <template>
-    <div>
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <router-link :to="{name: 'home'}" class="navbar-brand">Treclon</router-link>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <v-app>
+        <Nav />
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto"></ul>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLoggedIn">Login</router-link>
-                        <router-link :to="{ name: 'register' }" class="nav-link" v-if="!isLoggedIn">Register</router-link>
-                        <li class="nav-link" v-if="isLoggedIn"> Hi, {{name}}</li>
-                        <router-link :to="{ name: 'board' }" class="nav-link" v-if="isLoggedIn">Board</router-link>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <main class="py-4">
-            <router-view></router-view>
-        </main>
-    </div>
+        <Header />
+
+        <!-- Sizes your content based upon application components -->
+        <v-main>
+            <!-- Provides the application the proper gutter -->
+            <v-container fluid>
+                <router-view></router-view>
+            </v-container>
+        </v-main>
+
+        <Footer />
+    </v-app>
 </template>
 
+
 <script>
+import Header from '@components/layout/Header'
+import Footer from '@components/layout/Footer'
+import Nav    from '@components/layout/Nav'
+
 export default {
-    data(){
-        return {
-            isLoggedIn : null,
-            name : null
-        }
+    name: "App",
+    components: {
+        Header,
+        Footer,
+        Nav,
     },
-    mounted(){
-        this.isLoggedIn = localStorage.getItem('jwt')
-        this.name = localStorage.getItem('user')
-    }
 }
 </script>

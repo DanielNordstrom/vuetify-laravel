@@ -35,6 +35,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        event(new \App\Events\TaskAdded());
+        event(new \App\Events\TasksUpdated());
+
         $task = Task::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
@@ -99,6 +102,8 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $status = $task->delete();
+
+        event(new \App\Events\TasksUpdated());
 
         return response()->json([
             'status' => $status,

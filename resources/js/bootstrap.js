@@ -10,7 +10,7 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
+//    require('bootstrap');
 } catch (e) {}
 
 /**
@@ -19,9 +19,10 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+/*** NOTE: axios is being loaded through services/api.js ***/
+//window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+//window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -29,13 +30,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo';
+import Echo from 'laravel-echo';
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    wsHost: 'localhost',
+    wsPost: 6001,
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    forceTLS: true,
+    disableStats: true
+});
