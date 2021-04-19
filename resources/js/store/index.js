@@ -8,5 +8,6 @@ export default new Vuex.Store({
     strict: process.env.NODE_ENV !== 'production',
     modules: {
         blog,
+        //TODO: #2 Add auth module
     },
 })
