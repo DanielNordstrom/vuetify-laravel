@@ -31,4 +31,14 @@ export default {
             }, 250)
         })
     },
+    getPost({ commit }, $id) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                let posts = api.get('/api/post/${id}').then(response => {
+                    commit('GET_POST', response.data)
+                    resolve()
+                })
+            }, 250)
+        })
+    },
 }
