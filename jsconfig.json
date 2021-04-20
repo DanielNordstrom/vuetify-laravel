@@ -2,7 +2,24 @@
     "typeAcquisition": {
         "exclude": [ "dotenv", "source-map" ]
     },
+    "compilerOptions": {
+        "baseUrl": "resources/js",
+        "allowSyntheticDefaultImports": false,
+        "paths": {
+            "@/*": ["./*"],
+            "@components/*": ["./components/*"],
+            "@common/*": ["./components/common/*"],
+            "@layout/*": ["./components/layout/*"],
+            "@ui/*": ["./components/ui/*"],
+            "@pages/*": ["./pages/*"],
+            "@plugins/*": ["./plugins/*"],
+            "@services/*": ["./services/*"],
+            "@store/*": ["./store/*"],
+            "@modules/*": ["./store/modules/*"],
+        }
+    },
     "include": [
         "./resources/js/**/*"
-    ]
+    ],
+    "exclude": ["node_modules"]
 }

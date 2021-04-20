@@ -1,7 +1,6 @@
 <template>
     <v-app>
         <Nav />
-
         <Header />
 
         <!-- Sizes your content based upon application components -->
