@@ -2,18 +2,8 @@
     <main>
         <h1>
             <span>Blog Posts ({{ getPostCount }})</span>
-            <v-chip
-                class="mr-2"
-                @click="toggleForm"
-                color="primary"
-                outlined
-            >
-                <v-icon left>mdi-plus</v-icon>
-                <span v-if="!isFormVisible">Add New Post</span>
-                <span v-if="isFormVisible">Hide Form</span>
-            </v-chip>
+            <BlogForm :post="editPost" />
         </h1>
-        <BlogForm v-if="isFormVisible" />
 
         <v-container>
             <v-row dense>
@@ -38,7 +28,10 @@ export default {
     },
     data() {
         return {
-            isFormVisible: false,
+            editPost: {
+                title: 'Prop Title',
+                body: 'Prop body',
+            },
         }
     },
     mounted() {
@@ -50,9 +43,6 @@ export default {
     },
     methods: {
         ...mapActions("blog", ["loadPosts"]),
-        toggleForm() {
-            this.isFormVisible = !this.isFormVisible
-        }
     },
 }
 </script>

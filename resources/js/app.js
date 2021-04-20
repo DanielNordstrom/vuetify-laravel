@@ -18,9 +18,28 @@ Vue.use(VueRouter)
 import App              from '@components/App'
 import DashboardPage    from '@pages/DashboardPage'
 import LoginPage        from '@pages/LoginPage'
+import Login            from '@components/login'
 import RegisterPage     from '@pages/RegisterPage'
 import TestPage         from '@pages/TestPage'
 import BlogPage         from '@pages/BlogPage'
+
+// TODO: Move this to a router file
+const ifNotAuthenticated = (to, from, next) => {
+    console.log('isAuthenticated: ', store.getters.isAuthenticated)
+    if (!store.getters.isAuthenticated) {
+        next();
+        return;
+    }
+    next("/");
+};
+
+  const ifAuthenticated = (to, from, next) => {
+    if (store.getters.isAuthenticated) {
+        next();
+        return;
+    }
+    next("/login");
+  };
 
 const router = new VueRouter({
     mode: 'history',
@@ -29,26 +48,32 @@ const router = new VueRouter({
             path: '/',
             name: 'board',
             component: DashboardPage,
+            beforeEnter: ifAuthenticated
         },
         {
             path: '/login',
             name: 'login',
-            component: LoginPage,
+//            component: LoginPage,
+            component: Login,
+            beforeEnter: ifNotAuthenticated
         },
         {
             path: '/register',
             name: 'register',
             component: RegisterPage,
+            beforeEnter: ifNotAuthenticated
         },
         {
             path: '/test',
             name: 'test',
             component: TestPage,
+            beforeEnter: ifAuthenticated
         },
         {
             path: '/blog',
             name: 'blog',
             component: BlogPage,
+            beforeEnter: ifAuthenticated
         },
     ],
 })

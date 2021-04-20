@@ -1,5 +1,5 @@
 <template>
-    <v-card elevation="2" outlined shaped>
+    <v-card elevation="2" outlined>
         <v-card-title>{{ post.title }}</v-card-title>
         <v-card-subtitle>Blog Post #{{ post.id }}</v-card-subtitle>
         <v-card-text>{{ post.body }}</v-card-text>
